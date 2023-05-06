@@ -1,0 +1,6 @@
+:root {
+    --small-min: 0px;
+    --medium-min: 601px;
+    --large-min: 993px;
+    --extra-large-min: 1201px;
+}

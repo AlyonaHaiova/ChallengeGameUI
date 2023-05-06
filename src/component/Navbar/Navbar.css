@@ -1,0 +1,5 @@
+.Navbar {
+    height: var(--navbar-height);
+    background-color: var(--primary-color);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+}

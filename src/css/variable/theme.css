@@ -1,0 +1,14 @@
+:root {
+    --navbar-height: 80px;
+    --content-padding: 40px;
+
+    --base-color: #FFE6E6;
+    --primary-color: #937DC2;
+    --primary-light-color: #D9D9D9;
+    --primary-dark-color: #836FAF;
+    --secondary-color: #FEB5C2;
+    --secondary-light-color: #FFE6E6;
+    --input-placeholder-color: #909090;
+
+    --primary-font: "Kanit";
+}

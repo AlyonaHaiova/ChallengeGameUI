@@ -1,0 +1,4 @@
+.ShadowText {
+    font-family: var(--primary-font), sans-serif;
+    color: var(--base-color);
+}
