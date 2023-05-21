@@ -1,0 +1,46 @@
+.carousel-wrapper {
+    width: 75%;
+}
+
+.carousel-title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.carousel__cards {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.2rem;
+    color: #836FAF;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.carousel__button:hover {
+    font-size: 2.6rem;
+}
+
+.carousel__button--prev {
+    left: -2rem;
+}
+
+.carousel__button--next {
+    right: -2rem;
+}
+
+.one-third-width {
+    flex: 0 0 calc(100% / 3)!important;
+}
+
+.home-page-card-heading {
+    font-size: 2rem!important;
+}

@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import {ContentContainer} from "../ContentContainer/ContentContainer";
 import {Logo} from "../Logo/Logo";
-import {NavbarActions} from "../NavbarActions/NavbarActions";
+import {NavbarActions} from "./NavbarActions";
 
 export const Navbar = () => {
     return (

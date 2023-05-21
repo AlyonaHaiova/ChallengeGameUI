@@ -6,7 +6,7 @@ import * as logo from "../../asset/image/logo.png";
 
 export const Logo = () => {
     return (
-        <Link to={pages.home} className="Logo s-hflex full-height">
+        <Link to={pages.home} className="Logo s-hflex">
             <img src={logo.default} alt="logo" />
             <span className="s-vflex-center app-name">
                 {app.name}

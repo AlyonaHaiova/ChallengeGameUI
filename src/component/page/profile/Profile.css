@@ -1,9 +1,42 @@
-.card {
-    color:#fff;
-    width: 350px;
-    border-radius: 10px;
-    background: linear-gradient(145deg, #9a40a9, #b74cc9);
-    box-shadow:  20px 20px 60px #913ca0,
-    -20px -20px 60px #c552d8;
-    border: none
+.profile-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-card {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px #212020;
+}
+
+.profile-card-header {
+    background-color: #937DC2;
+    padding: 30px;
+}
+
+.profile-card-body {
+    padding: 20px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.profile-info {
+    margin-top: 20px;
+}
+
+.full-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.email {
+    font-size: 16px;
+    color: #212020;
 }

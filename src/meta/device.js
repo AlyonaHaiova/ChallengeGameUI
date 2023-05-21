@@ -22,4 +22,19 @@ export const getMinWidthMedia = (device) => {
     return `min-width: ${getMinWidthPx(device)}px`;
 }
 
+const FlexAlignment = {
+    start: "start",
+    center: "center",
+    end: "end"
+}
+
+export const FlexDirection = {
+    row: "row",
+    column: "column"
+}
+
+export default FlexDirection;
+
+export default FlexAlignment;
+
 export default Device;

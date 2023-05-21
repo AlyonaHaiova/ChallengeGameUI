@@ -4,5 +4,6 @@ export const pages = {
     registration: "/registration",
     help: "/help",
     profile: "/profile",
-    games: "/games"
+    myAccount: "/my-account",
+    newGame: "/my-account/new-game"
 };

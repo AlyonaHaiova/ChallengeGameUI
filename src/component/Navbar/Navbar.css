@@ -1,5 +1,48 @@
 .Navbar {
     height: var(--navbar-height);
-    background-color: var(--primary-color);
+    background-color: rgba(84,58,183,1);
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.NavbarActions .text {
+    font-size: 1.6rem!important;
+    padding: 0 10px;
+}
+
+.NavbarActions .link {
+    text-decoration: none;
+    color: unset;
+}
+
+.navbar-link, #navbar-logout > button {
+    height: 62px;
+    width: 150px;
+    background-color: transparent;
+    color: white;
+    font-size: 1.4rem;
+    text-shadow: 0 4px 1px rgba(0, 0, 0, 0.25)
+}
+
+.navbar-link:hover {
+    background-color: #836FAF;
+}
+
+#help-page-link {
+    margin-right: 0;
+    width: 50px;
+}
+#help-page-link > span {
+    font-size: 1.5rem!important;
+}
+
+#navbar-logout {
+    height: 62px;
+    margin-top: 15px;
+}
+
+#navbar-logout > button {
+    background-color: transparent;
+    border: none;
+    text-transform: none;
+    font-weight: normal;
 }

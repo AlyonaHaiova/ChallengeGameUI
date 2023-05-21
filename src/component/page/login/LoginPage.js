@@ -1,7 +1,7 @@
-import {useState} from "react";
-import {LoginForm} from "../../Auth/Login/LoginForm/LoginForm";
+import React, {useState} from "react";
+import {LoginForm} from "../../Auth/LoginForm";
 import "./LoginPage.css";
-import {RegistrationForm} from "../../Auth/Registration/RegistrationForm/RegistrationForm";
+import {RegistrationForm} from "../../Auth/RegistrationForm";
 
 const LoginPage = () => {
     const [isRightSideActive, setIsRightSideActive] = useState(false);
@@ -15,27 +15,31 @@ const LoginPage = () => {
     }
 
     return (
-        <div className={isRightSideActive ? 'right-panel-active container' : 'container'} id="container">
+        <div>
+        <div className={isRightSideActive ? 'right-panel-active container centered' : 'container centered'} id="container">
             <div className="form-container sign-up-container">
-                <RegistrationForm/>
+                <RegistrationForm />
             </div>
             <div className="form-container sign-in-container">
-                <LoginForm/>
+                <LoginForm />
+                <p>alenag2602@gmail.com</p>
+                <p>QwErTy1@3$5</p>
             </div>
             <div className="overlay-container">
                 <div className="overlay">
                     <div className="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p>Login and continue the game</p>
-                        <button className="ghost" id="signIn" onClick={SignInChange}>Sign In</button>
+                        <h1>Вітаю знову!</h1>
+                        <p>Вже маєш акаунт?</p>
+                        <button className="ghost" id="signIn" onClick={SignInChange}>Увійти</button>
                     </div>
                     <div className="overlay-panel overlay-right">
-                        <h1>Hello, Friend!</h1>
-                        <p>Enter your personal details and start journey with us</p>
-                        <button className="ghost" id="signUp" onClick={SignUpChange}>Sign Up</button>
+                        <h1>Привіт, друже!</h1>
+                        <p>Ще не маєш акаунту?</p>
+                        <button className="ghost" id="signUp" onClick={SignUpChange}>Зареєструватись</button>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

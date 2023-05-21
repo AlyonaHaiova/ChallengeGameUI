@@ -1,3 +1,8 @@
+.centered {
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
 .long-text {
     white-space: nowrap;
     overflow: hidden;
@@ -65,6 +70,10 @@ a.deactivate {
 
 .window-height {
     height: 100vh;
+}
+
+.w-50 {
+    width: 50%;
 }
 
 .full-height {
@@ -435,4 +444,13 @@ a.deactivate {
     .xl-justify-align {
         text-align: justify;
     }
+}
+
+.small {
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    transition: transform 0.4s;
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
 }

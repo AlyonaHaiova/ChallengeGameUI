@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import "./css/common/site.css";
 import "./css/common/common.css";
-import "./css/variable/device.css";
 import "./css/variable/theme.css";
+import "./css/variable/device.css";
 import {BrowserRouter} from "react-router-dom";
 import AppWrapper from "./AppWrapper";
 
