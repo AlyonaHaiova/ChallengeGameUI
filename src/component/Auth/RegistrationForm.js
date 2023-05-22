@@ -27,7 +27,6 @@ export const RegistrationForm = () => {
             if(res) {
                 alert("Акаунт успішно зареєстровано. Вітаю у Challenger!")
                 setUser(res.data);
-                navigate(pages.myAccount);
             }
         }).catch(error => {
             console.log(error);
