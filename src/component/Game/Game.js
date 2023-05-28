@@ -110,7 +110,6 @@ const Game = ({id}) => {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data);
                     let totalPoints = 0
                     const updatedPlayers = response.data.map((p) => {
                         totalPoints += p.points;
@@ -240,9 +239,16 @@ const Game = ({id}) => {
             }
         } else {
             if (player.points >= game.goal) {
-                player.isWinner = true;
-                await setShowWinnerPopup(true);
-                setWinners((prevWinners) => [...prevWinners, { player: player.title, place: prevWinners.length + 1 }]);
+                const isPlayerAlreadyInWinners = winners.some(
+                    (winner) => winner.player === player.title
+                );
+                if (!isPlayerAlreadyInWinners) {
+                    await setShowWinnerPopup(true);
+                    setWinners((prevWinners) => [...prevWinners, {
+                        player: player.title,
+                        place: prevWinners.length + 1
+                    }]);
+                }
             }
         }
 
