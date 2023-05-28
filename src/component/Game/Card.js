@@ -27,7 +27,7 @@ const Card = ({card, next, refresh, penalty}) => {
                 <div className={"card__details"}>
                     <p>{card.description}</p>
 
-                    <p>{card.points} points</p>
+                    <p>Бали: {card.points}</p>
 
                     <div className="buttons-row">
                         <button className="icon-button" onClick={next}>
