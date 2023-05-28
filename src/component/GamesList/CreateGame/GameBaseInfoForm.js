@@ -4,10 +4,19 @@ import  "./CreateGame.css"
 function GameBaseInfoForm({ onSubmit }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [goal, setGoal] = useState(0);
+    const [teamMode, setTeamMode] = useState(false);
+
+    const handleCheckboxChange = () => {
+        setTeamMode(!teamMode);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit({ title, description});
+        if (goal === 0) {
+            setGoal(100);
+        }
+        onSubmit({ title, description, goal, teamMode});
     };
 
     return (
@@ -30,6 +39,26 @@ function GameBaseInfoForm({ onSubmit }) {
                 required
                 className="description-input centered"
             />
+
+            <label htmlFor="title">Фініш гри</label>
+            <input
+                id="goal"
+                type="number"
+                value={goal}
+                onChange={(event) => setGoal(event.target.value)}
+                defaultValue={100}
+                className="title-input centered"
+            />
+
+            <div>
+                <input
+                    type="checkbox"
+                    checked={teamMode}
+                    onChange={handleCheckboxChange}
+                    id="mode"
+                />
+                <label htmlFor="mode">Ввімкнути командний режим</label>
+            </div>
 
             <button type="submit" className="form-continue-button">Продовжити</button>
         </form>

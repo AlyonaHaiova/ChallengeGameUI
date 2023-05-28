@@ -3,10 +3,9 @@ import GameBaseInfoForm from './../../GamesList/CreateGame/GameBaseInfoForm';
 import GameCardCategoriesForm from './../../GamesList/CreateGame/GameCardCategoriesForm';
 import GameRolesForm from './../../GamesList/CreateGame/GameRolesForm';
 import {UserContext} from "../../../context/UserContext";
-import {Link} from "react-router-dom";
-import {pages} from "../../../meta/page";
 import "./../../GamesList/CreateGame/CreateGame.css"
 import CardsForm from "../../GamesList/CreateGame/CardsForm";
+import LoginPage from "../login/LoginPage";
 
 function NewGame() {
     const [gameData, setGameData] = useState({});
@@ -22,7 +21,9 @@ function NewGame() {
                 body: JSON.stringify({
                     userId: user.id,
                     title: baseInfo.title,
-                    description: baseInfo.description
+                    description: baseInfo.description,
+                    goal: baseInfo.goal,
+                    isTeam: baseInfo.teamMode
                 }),
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,8 +52,8 @@ function NewGame() {
                         gameId: gameId,
                         title: category.title,
                         color: category.color,
-                        isPlayable: true,
-                        isPenalty: false
+                        isPlayable: !category.isPenalty,
+                        isPenalty: category.isPenalty
                     }),
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,39 +66,8 @@ function NewGame() {
                 })
             );
             await Promise.all(cardTypePromises);
-            setGameData({...gameData, cardCategories: categories});
+            setGameData({...gameData, ...categories});
             setStep(3);
-        } catch (error) {
-            setErrorMessage(error.message);
-            console.log(errorMessage);
-        }
-    };
-
-    const handlePenaltyCategorySubmit = async (penaltyCategories) => {
-        try {
-            const cardTypePromises = penaltyCategories.map((category) =>
-                fetch('http://localhost:8080/api/card-types', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        gameId: gameId,
-                        title: category.title,
-                        color: category.color,
-                        isPlayable: false,
-                        isPenalty: true
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.token.accessToken}`
-                    },
-                }).then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`Не можу додати категорію ${category.title}`);
-                    }
-                })
-            );
-            await Promise.all(cardTypePromises);
-            setGameData({...gameData, penaltyCategories: penaltyCategories});
-            setStep(4);
         } catch (error) {
             setErrorMessage(error.message);
             console.log(errorMessage);
@@ -126,7 +96,7 @@ function NewGame() {
             );
             await Promise.all(rolePromises);
             setGameData({...gameData, roles});
-            setStep(5);
+            setStep(4);
         } catch (error) {
             setErrorMessage(error.message);
             console.log(errorMessage);
@@ -152,14 +122,12 @@ function NewGame() {
                 }).then((response) => {
                     if (!response.ok) {
                         throw new Error(`Не можу створити картку ${card.title}`);
-                    } else {
-                        console.log(response)
                     }
                 })
             );
             await Promise.all(cardPromises);
             setGameData({...gameData, cards});
-            setStep(6);
+            setStep(5);
         } catch (error) {
             setErrorMessage(error.message);
             console.log(errorMessage);
@@ -175,18 +143,12 @@ function NewGame() {
                             <h2>Ігрові категорії</h2>
                             <GameCardCategoriesForm key="cardCategories" onSubmit={handleCardCategoriesSubmit}/>
                         </div>;
-
             case 3:
-                return <div>
-                        <h2>Штрафні категорії</h2>
-                        <GameCardCategoriesForm key="penaltyCategories" onSubmit={handlePenaltyCategorySubmit}/>
-                    </div>;
-            case 4:
                 return <div>
                         <h2>Ролі</h2>
                         <GameRolesForm onSubmit={handleRolesSubmit}/>
                     </div>;
-            case 5:
+            case 4:
                 return <div>
                             <h2>Завдання</h2>
                             <CardsForm onSubmit={handleCardsSubmit} gameId={gameId}/>
@@ -196,13 +158,11 @@ function NewGame() {
         }
     };
 
-    if (user.id <= 0) {
-        return (
-            <Link to={pages.login} className="link">
-                Login
-            </Link>
+    if (!user) {
+        return(
+            <LoginPage />
         )
-    } else {
+    }  else {
         return (
             <div>
                 <div className={"new-game-container centered"}>
@@ -214,9 +174,3 @@ function NewGame() {
     }
 }
 export default NewGame;
-
-
-
-
-
-

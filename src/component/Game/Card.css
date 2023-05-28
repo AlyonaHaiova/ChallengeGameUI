@@ -15,6 +15,7 @@
     width: 20rem;
     perspective: 200rem;
     margin: 2rem;
+    color: #000;
 }
 .card__side {
     height: 30rem;

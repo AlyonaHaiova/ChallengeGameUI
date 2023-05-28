@@ -5,12 +5,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const MIN_TITLE_LENGTH = 3;
-const MAX_TITLE_LENGTH = 20;
+const MAX_TITLE_LENGTH = 50;
+
+const penaltyCategories = [
+    {
+        title: "Космічний монстр!",
+        color: "#45ad27",
+        isPenalty: true
+    },
+    {
+        title: "Корабель зламався!",
+        color: "#f02211",
+        isPenalty: true
+    },
+    {
+        title: "Метеоритний дощ!",
+        color: "#3498db",
+        isPenalty: true
+    }
+]
+
+const initialCategories = [
+    { title: '', color: '#f9b23', isPenalty: false },
+    ...penaltyCategories,
+];
 
 function GameCardCategoriesForm({ onSubmit }) {
-    const [categories, setCategories] = useState([{ title: '', color: '' }]);
-
-    const handleSubmit = (event) => {
+    const [categories, setCategories] = useState(initialCategories);
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const isFormValid = categories.every((category) => {
@@ -32,7 +54,7 @@ function GameCardCategoriesForm({ onSubmit }) {
     };
 
     const handleAddCategory = () => {
-        setCategories([...categories, { title: '', color: '' }]);
+        setCategories([...categories, { title: '', color: '', isPenalty: false }]);
     };
 
     const handleRemoveCategory = (index) => {

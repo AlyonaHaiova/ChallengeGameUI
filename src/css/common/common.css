@@ -1,3 +1,51 @@
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: white;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+button, .popup-button {
+    border-radius: 20px;
+    border: 1px solid rgba(84,58,183,1);;
+    background-color: rgba(84,58,183,1);;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active, .popup-button:active {
+    transform: scale(0.95);
+}
+
+button:focus, .popup-button:focus {
+    outline: none;
+}
+
+.red {
+    background-color: red!important;
+}
+
+.green {
+    background-color: #17a917 !important;
+}
+
 .centered {
     margin-left: auto!important;
     margin-right: auto!important;

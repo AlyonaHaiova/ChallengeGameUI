@@ -44,7 +44,7 @@ export const LoginForm = () => {
     return (
         <div>
             <h1>Увійти до акаунту</h1>
-            <form onSubmit={handleSubmit} action="src/component/Auth/LoginForm#">
+            <form className={"auth-form"} onSubmit={handleSubmit} action="src/component/Auth/LoginForm#">
                 <input type="email" value={email} placeholder={"Електронна пошта"} onChange={e => setEmail(e.target.value)}/>
                 <input type="password" value={password} placeholder={"Пароль"} onChange={e => setPassword(e.target.value)}/>
                 <button type="submit">Увійти</button>

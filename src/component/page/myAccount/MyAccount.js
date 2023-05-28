@@ -1,18 +1,15 @@
 import GameList from "../../GamesList/GameList";
 import {useContext} from "react";
 import {UserContext} from "../../../context/UserContext";
-import {Link} from "react-router-dom";
-import {pages} from "../../../meta/page";
+import LoginPage from "../login/LoginPage";
 
 const MyAccountPage = () => {
 
     const { user } = useContext(UserContext);
 
-    if (user.id <= 0) {
+    if (!user) {
         return(
-            <Link to={pages.login} className="link">
-                Login
-            </Link>
+            <LoginPage />
         )
     } else {
         return (

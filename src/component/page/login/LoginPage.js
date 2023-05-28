@@ -22,8 +22,6 @@ const LoginPage = () => {
             </div>
             <div className="form-container sign-in-container">
                 <LoginForm />
-                <p>alenag2602@gmail.com</p>
-                <p>QwErTy1@3$5</p>
             </div>
             <div className="overlay-container">
                 <div className="overlay">

@@ -269,3 +269,20 @@ li {
     font-weight: 400;
 }
 
+.settings-on-card {
+    position: relative;
+    z-index: 3;
+    margin-top: 10px;
+    background-color: transparent;
+    width: 30px;
+    border: none;
+}
+
+.reset {
+    background-color: transparent;
+}
+
+.form-reset-button {
+    border: red;
+}
+

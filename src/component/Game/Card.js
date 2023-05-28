@@ -54,7 +54,6 @@ const Card = ({card, next, refresh, penalty}) => {
         </div>
     </div>
     );
-
 };
 
 export default Card;

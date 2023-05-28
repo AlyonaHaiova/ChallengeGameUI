@@ -45,7 +45,6 @@ function CardsForm({ onSubmit, gameId }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Validate each card
         const isFormValid = cards.every((card) => {
             const cardErrors = [];
 

@@ -36,7 +36,7 @@ export const RegistrationForm = () => {
     return (
         <div>
             <h1>Створити акаунт</h1>
-            <form onSubmit={handleSubmit} action="src/component/Auth/RegistrationForm#">
+            <form className={"auth-form"} onSubmit={handleSubmit} action="src/component/Auth/RegistrationForm#">
                 <input type="text" name="firstName" value={firstName} placeholder={"Ім'я"} onChange={e => setFirstName(e.target.value)} />
                 <input type="text" name="lastName" value={lastName} placeholder={"Прізвище"} onChange={e => setLastName(e.target.value)} />
                 <input type="text" name="username" value={username} placeholder={"Юзернейм"} onChange={e => setUsername(e.target.value)} />
