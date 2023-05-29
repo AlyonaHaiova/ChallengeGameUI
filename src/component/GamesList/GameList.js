@@ -12,6 +12,9 @@ import "./../Game/Game.css";
 const GameList = () => {
 
     const [games, setGames] = useState([]);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [confirmationAction, setConfirmationAction] = useState("");
+    const [selectedGameId, setSelectedGameId] = useState("");
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -30,6 +33,41 @@ const GameList = () => {
     }
 
     const handleRemoveGame = (gameId) => {
+        setSelectedGameId(gameId);
+        setConfirmationAction("видалити");
+        setShowConfirmation(true);
+    }
+
+    const handleReset = (gameId) => {
+        setSelectedGameId(gameId);
+        setConfirmationAction("стерти");
+        setShowConfirmation(true);
+    };
+
+    const handleChangeMode = (gameId) => {
+        setSelectedGameId(gameId);
+        setConfirmationAction("перемкнути на інший режим");
+        setShowConfirmation(true);
+    };
+
+    const confirmAction = () => {
+        switch (confirmationAction) {
+            case "видалити":
+                removeGame(selectedGameId);
+                break;
+            case "стерти":
+                resetGame(selectedGameId);
+                break;
+            case "перемкнути на інший режим":
+                changeGameMode(selectedGameId);
+                break;
+            default:
+                break;
+        }
+        setShowConfirmation(false);
+    }
+
+    const removeGame = (gameId) => {
         axios.delete(`http://localhost:8080/api/games/${gameId}`)
             .then(response => {
                 setGames(prevGames => prevGames.filter(game => game.id !== gameId));
@@ -37,12 +75,12 @@ const GameList = () => {
             .catch(error => console.log(error));
     }
 
-    const handleReset = async (gameId) => {
+    const resetGame = (gameId) => {
         axios.get(`http://localhost:8080/api/games/game/${gameId}/reset`)
             .catch(error => console.log(error));
     };
 
-    const handleChangeMode = async (gameId) => {
+    const changeGameMode = (gameId) => {
         axios.get(`http://localhost:8080/api/games/game/${gameId}/mode`)
             .catch(error => console.log(error));
     };
@@ -73,6 +111,19 @@ const GameList = () => {
                     </div>
                 ))}
             </div>
+
+            {showConfirmation && (
+                <div className="popup">
+                    <div className="popup-content">
+                        <h2>Увага!</h2>
+                        <p>Ви впевнені що хочете {confirmationAction} цю гру?</p>
+                        <div className="popup-buttons">
+                            <button onClick={confirmAction} className="popup-confirm">Так</button>
+                            <button onClick={() => setShowConfirmation(false)} className="popup-cancel">Ні</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
