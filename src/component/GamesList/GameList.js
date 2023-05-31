@@ -19,7 +19,7 @@ const GameList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/games/${user.id}`, {
+        axios.get(`http://13.51.85.16:8080/api/games/${user.id}`, {
             headers: {
                 Authorization: `Bearer ${user.token.accessToken}`
             }
@@ -68,7 +68,7 @@ const GameList = () => {
     }
 
     const removeGame = (gameId) => {
-        axios.delete(`http://localhost:8080/api/games/${gameId}`)
+        axios.delete(`http://13.51.85.16:8080/api/games/${gameId}`)
             .then(response => {
                 setGames(prevGames => prevGames.filter(game => game.id !== gameId));
             })
@@ -76,12 +76,12 @@ const GameList = () => {
     }
 
     const resetGame = (gameId) => {
-        axios.get(`http://localhost:8080/api/games/game/${gameId}/reset`)
+        axios.get(`http://13.51.85.16:8080/api/games/game/${gameId}/reset`)
             .catch(error => console.log(error));
     };
 
     const changeGameMode = (gameId) => {
-        axios.get(`http://localhost:8080/api/games/game/${gameId}/mode`)
+        axios.get(`http://13.51.85.16:8080/api/games/game/${gameId}/mode`)
             .catch(error => console.log(error));
     };
 

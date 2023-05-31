@@ -16,7 +16,7 @@ function CardsForm({ onSubmit, gameId }) {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/api/card-types/${gameId}`, {
+            .get(`http://13.51.85.16:8080/api/card-types/${gameId}`, {
                 headers: {
                     Authorization: `Bearer ${user.token.accessToken}`,
                 },
@@ -29,7 +29,7 @@ function CardsForm({ onSubmit, gameId }) {
             });
 
         axios
-            .get(`http://localhost:8080/api/games/${gameId}/roles`, {
+            .get(`http://13.51.85.16:8080/api/games/${gameId}/roles`, {
                 headers: {
                     Authorization: `Bearer ${user.token.accessToken}`,
                 },
@@ -146,7 +146,7 @@ function CardsForm({ onSubmit, gameId }) {
                                         <div>
                                             <div>{card.description}</div>
                                         </div>
-                                        <div>{card.points} points</div>
+                                        <div>{card.points} балів</div>
                                         <button onClick={() => handleRemoveCard(index)} className={"remove-item-on-card"}>
                                             <FontAwesomeIcon icon={faTrash} color={"black"}/>
                                         </button>

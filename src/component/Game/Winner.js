@@ -118,10 +118,10 @@ const Winner = ({ player, moves, winners, teamMode, onClose }) => {
                     Завершити гру
                 </Link>
                 <button className="popup-button" onClick={handleDownloadStatistic}>
-                    Завантажити статистику
+                    Завантажити результати
                 </button>
                 <button className="popup-button" onClick={handleShowStatistic}>
-                    Показати статистику
+                    Показати результати
                 </button>
                 </div>
 

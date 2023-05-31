@@ -17,7 +17,7 @@ export const RegistrationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/api/auth/register', {
+        axios.post('http://13.51.85.16:8080/api/auth/register', {
             firstName: firstName,
             lastName: lastName,
             email: email,

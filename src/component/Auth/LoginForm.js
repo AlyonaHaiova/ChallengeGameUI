@@ -12,14 +12,14 @@ export const LoginForm = () => {
     const {setUser} = useContext(UserContext);
 
     const getUserInfo = async (email) => {
-        return await axios.get(`http://localhost:8080/api/auth/info/${email}`)
+        return await axios.get(`http://13.51.85.16:8080/api/auth/info/${email}`)
             .then(response => response.data)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/auth/login',
+        axios.post('http://13.51.85.16:8080/api/auth/login',
             {email, password}
         ).then(async function (response) {
             const token = response.data;

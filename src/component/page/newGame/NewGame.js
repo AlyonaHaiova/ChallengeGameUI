@@ -16,7 +16,7 @@ function NewGame() {
 
     const handleBaseInfoSubmit = async (baseInfo) => {
         try {
-            const response = await fetch('http://localhost:8080/api/games', {
+            const response = await fetch('http://13.51.85.16:8080/api/games', {
                 method: 'POST',
                 body: JSON.stringify({
                     userId: user.id,
@@ -46,7 +46,7 @@ function NewGame() {
     const handleCardCategoriesSubmit = async (categories) => {
         try {
             const cardTypePromises = categories.map((category) =>
-                fetch('http://localhost:8080/api/card-types', {
+                fetch('http://13.51.85.16:8080/api/card-types', {
                     method: 'POST',
                     body: JSON.stringify({
                         gameId: gameId,
@@ -77,7 +77,7 @@ function NewGame() {
     const handleRolesSubmit = async (roles) => {
         try {
             const rolePromises = roles.map((role) =>
-                fetch(`http://localhost:8080/api/games/${gameId}/roles`, {
+                fetch(`http://13.51.85.16:8080/api/games/${gameId}/roles`, {
                     method: 'POST',
                     body: JSON.stringify({
                         gameId: gameId,
@@ -106,7 +106,7 @@ function NewGame() {
     const handleCardsSubmit = async (cards) => {
         try {
             const cardPromises = cards.map((card) =>
-                fetch(`http://localhost:8080/api/games/${gameId}/cards`, {
+                fetch(`http://13.51.85.16:8080/api/games/${gameId}/cards`, {
                     method: 'POST',
                     body: JSON.stringify({
                         description: card.description,

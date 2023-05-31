@@ -78,7 +78,7 @@ const Game = ({id}) => {
     ]
 
     useEffect(() => {
-            axios.get(`http://localhost:8080/api/games/${id}/cards/next`, {})
+            axios.get(`http://13.51.85.16:8080/api/games/${id}/cards/next`, {})
                 .then((response) => {
                     const updatedData = {
                         ...response.data,
@@ -90,7 +90,7 @@ const Game = ({id}) => {
                     console.log("Error retrieving card:", error);
                 });
         axios
-            .get(`http://localhost:8080/api/games/game/${id}`, {
+            .get(`http://13.51.85.16:8080/api/games/game/${id}`, {
                 headers: {
                     Authorization: `Bearer ${user.token.accessToken}`,
                 },
@@ -104,7 +104,7 @@ const Game = ({id}) => {
             });
 
             axios
-                .get(`http://localhost:8080/api/games/${id}/roles`, {
+                .get(`http://13.51.85.16:8080/api/games/${id}/roles`, {
                     headers: {
                         Authorization: `Bearer ${user.token.accessToken}`,
                     },
@@ -158,7 +158,7 @@ const Game = ({id}) => {
     }, [id, user.token.accessToken]);
 
     const setPoints = () => {
-        axios.post(`http://localhost:8080/api/games/${id}/roles/points`, {
+        axios.post(`http://13.51.85.16:8080/api/games/${id}/roles/points`, {
             id: card.role.id,
             points: card.points
         }).catch((error) => {
@@ -278,7 +278,7 @@ const Game = ({id}) => {
         await finishMove(1);
 
         await recordMove(1);
-        axios.get(`http://localhost:8080/api/games/${id}/cards/next`, {
+        axios.get(`http://13.51.85.16:8080/api/games/${id}/cards/next`, {
         })
             .then((response) => {
                 const updatedData = {
@@ -295,7 +295,7 @@ const Game = ({id}) => {
 
     const refresh = () => {
         recordMove(2)
-        axios.get(`http://localhost:8080/api/games/${id}/cards/refresh`, {
+        axios.get(`http://13.51.85.16:8080/api/games/${id}/cards/refresh`, {
         })
             .then((response) => {
                 const updatedData = {
@@ -314,7 +314,7 @@ const Game = ({id}) => {
         await finishMove(2);
 
         await recordMove(3);
-       axios.get(`http://localhost:8080/api/games/${id}/cards/penalty`, {
+       axios.get(`http://13.51.85.16:8080/api/games/${id}/cards/penalty`, {
        })
            .then((response) => {
                const updatedData = {
