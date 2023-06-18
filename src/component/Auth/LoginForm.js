@@ -8,6 +8,7 @@ export const LoginForm = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const {setUser} = useContext(UserContext);
 
@@ -37,6 +38,7 @@ export const LoginForm = () => {
                 })
                 navigate(pages.myAccount);
         }}).catch(function (error) {
+            setError('Логін чи пароль не є правильними. Будь ласка, спробуйте ще раз');
             console.log(error);
         });
     };
@@ -44,6 +46,9 @@ export const LoginForm = () => {
     return (
         <div>
             <h1>Увійти до акаунту</h1>
+
+            {error && <p className="error-msg">{error}</p>}
+
             <form className={"auth-form"} onSubmit={handleSubmit} action="src/component/Auth/LoginForm#">
                 <input type="email" value={email} placeholder={"Електронна пошта"} onChange={e => setEmail(e.target.value)}/>
                 <input type="password" value={password} placeholder={"Пароль"} onChange={e => setPassword(e.target.value)}/>

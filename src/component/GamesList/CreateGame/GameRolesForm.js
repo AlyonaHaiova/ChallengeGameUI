@@ -3,40 +3,45 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import CreateGameListItem from "../CreateButton";
 
-const MIN_TITLE_LENGTH = 3;
-const MAX_TITLE_LENGTH = 20;
-
 function GameRolesForm({ onSubmit }) {
+
     const [newRoles, setNewRoles] = useState([{ title: '' }]);
+    const [titleErrors, setTitleErrors] = useState([]);
 
     const handleAddRole = () => {
         setNewRoles([...newRoles, { title: '' }]);
+        setTitleErrors([...titleErrors, false]);
     };
 
     const handleRemoveRole = (index) => {
         const updatedRoles = [...newRoles];
         updatedRoles.splice(index, 1);
         setNewRoles(updatedRoles);
+
+        const newTitleErrors = [...titleErrors];
+        newTitleErrors.splice(index, 1);
+        setTitleErrors(newTitleErrors);
     };
 
     const handleRoleChange = (index, value) => {
         const updatedRoles = [...newRoles];
         updatedRoles[index].title = value;
         setNewRoles(updatedRoles);
+
+        const newTitleErrors = [...titleErrors];
+        newTitleErrors[index] = value.length < 3 || value.length > 20;
+        setTitleErrors(newTitleErrors);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const isFormValid = newRoles.every((role) => {
-            return role.title.length >= MIN_TITLE_LENGTH && role.title.length <= MAX_TITLE_LENGTH;
+            return role.title.length >= 3 && role.title.length <= 20;
         });
-
         if (isFormValid) {
-
             onSubmit(newRoles);
-        } else {
-            alert(`Please make sure all category titles are between ${MIN_TITLE_LENGTH} and ${MAX_TITLE_LENGTH} characters long.`);
+            setNewRoles([]);
         }
     };
 
@@ -48,9 +53,12 @@ function GameRolesForm({ onSubmit }) {
                         type="text"
                         value={role.title}
                         onChange={(event) => handleRoleChange(index, event.target.value)}
-                        required
                         className={"centered role-title"}
                     />
+
+                    {titleErrors[index] && (
+                        <p className="error-msg">Роль має бути від 3 до 20 символів</p>
+                    )}
 
                 </div>
             ))}

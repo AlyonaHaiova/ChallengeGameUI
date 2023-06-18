@@ -4,9 +4,6 @@ import CreateGameListItem from "../CreateButton";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const MIN_TITLE_LENGTH = 3;
-const MAX_TITLE_LENGTH = 50;
-
 const penaltyCategories = [
     {
         title: "Космічний монстр!",
@@ -26,24 +23,25 @@ const penaltyCategories = [
 ]
 
 const initialCategories = [
-    { title: '', color: '#f9b23', isPenalty: false },
     ...penaltyCategories,
+    { title: '', color: '#f9b23', isPenalty: false },
 ];
 
 function GameCardCategoriesForm({ onSubmit }) {
+
     const [categories, setCategories] = useState(initialCategories);
+    const [titleErrors, setTitleErrors] = useState([]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const isFormValid = categories.every((category) => {
-            return category.title.length >= MIN_TITLE_LENGTH && category.title.length <= MAX_TITLE_LENGTH;
+            return category.title.length >= 3 && category.title.length <= 50;
         });
 
         if (isFormValid) {
             onSubmit(categories);
             setCategories([]);
-        } else {
-            alert(`Будь ласка, переконайтесь що всі назви категорій знаходяться в межах від ${MIN_TITLE_LENGTH} до ${MAX_TITLE_LENGTH} символів.`);
         }
     };
 
@@ -51,16 +49,25 @@ function GameCardCategoriesForm({ onSubmit }) {
         const updatedCategories = [...categories];
         updatedCategories[index][field] = value;
         setCategories(updatedCategories);
+
+        const newTitleErrors = [...titleErrors];
+        newTitleErrors[index] = value.length < 3 || value.length > 50;
+        setTitleErrors(newTitleErrors);
     };
 
     const handleAddCategory = () => {
         setCategories([...categories, { title: '', color: '', isPenalty: false }]);
+        setTitleErrors([...titleErrors, false]);
     };
 
     const handleRemoveCategory = (index) => {
         const updatedCategories = [...categories];
         updatedCategories.splice(index, 1);
         setCategories(updatedCategories);
+
+        const newTitleErrors = [...titleErrors];
+        newTitleErrors.splice(index, 1);
+        setTitleErrors(newTitleErrors);
     };
 
     return (
@@ -77,6 +84,9 @@ function GameCardCategoriesForm({ onSubmit }) {
                         required
                         className={"w-50 centered category-title"}
                     />
+                    {titleErrors[index] && (
+                        <p className="error-msg">Назва має бути від 3 до 50 символів</p>
+                    )}
                     <div className={"colorpicker-container"}>
                         <label htmlFor={`categoryColor${index}`}>Колір</label>
                         <ChromePicker

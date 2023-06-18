@@ -12,6 +12,9 @@ function CardsForm({ onSubmit, gameId }) {
     const [categories, setCategories] = useState([]);
     const [roles, setRoles] = useState([]);
 
+    const [titleErrors, setTitleErrors] = useState([]);
+    const [categoryErrors, setCategoryErrors] = useState([]);
+
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -45,23 +48,27 @@ function CardsForm({ onSubmit, gameId }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isFormValid = cards.every((card) => {
-            const cardErrors = [];
+        const isFormValid = cards.every((card, index) => {
+            const cardErrors = {};
 
             if (card.description.trim() === "") {
-                cardErrors.push(...cardErrors,"Завдання є обов'язковим");
+                setTitleErrors((prevErrors) => [...prevErrors.slice(0, index), true, ...prevErrors.slice(index + 1)]);
+            } else {
+                setTitleErrors((prevErrors) => [...prevErrors.slice(0, index), false, ...prevErrors.slice(index + 1)]);
             }
 
             if (card.typeId === 0) {
-                cardErrors.push(...cardErrors,"Оберіть категорію");
+                setCategoryErrors((prevErrors) => [...prevErrors.slice(0, index), true, ...prevErrors.slice(index + 1)]);
+            } else {
+                setCategoryErrors((prevErrors) => [...prevErrors.slice(0, index), false, ...prevErrors.slice(index + 1)]);
             }
 
-            setErrors(cardErrors);
-            return cardErrors.length === 0;
+            setErrors((prevErrors) => [...prevErrors.slice(0, index), cardErrors, ...prevErrors.slice(index + 1)]);
+            return Object.keys(cardErrors).length === 0;
         });
 
         if (isFormValid) {
-            cards.forEach((card) => card.roleIds = roles);
+            cards.forEach((card) => (card.roleIds = roles));
             onSubmit(cards);
             setCards([]);
         }
@@ -75,12 +82,22 @@ function CardsForm({ onSubmit, gameId }) {
 
     const handleAddCard = () => {
         setCards([...cards, { description: '', points: 0, typeId: '', roleIds: [] }]);
+        setTitleErrors([...titleErrors, false]);
+        setCategoryErrors([...categoryErrors, false]);
     };
 
     const handleRemoveCard = (index) => {
         const updatedCards = [...cards];
         updatedCards.splice(index, 1);
         setCards(updatedCards);
+
+        const newTitleErrors = [...titleErrors];
+        newTitleErrors.splice(index, 1);
+        setTitleErrors(newTitleErrors);
+
+        const newCategoryErrors = [...categoryErrors];
+        newCategoryErrors.splice(index, 1);
+        setCategoryErrors(newCategoryErrors);
     };
 
     return (
@@ -96,8 +113,11 @@ function CardsForm({ onSubmit, gameId }) {
                                 onChange={(e) => handleChange(index, 'description', e.target.value)}
                                 className={"card-input"}
                             />
-                            {errors[index] && errors[index].description && <div>{errors[index].description}</div>}
                         </div>
+
+                        {errors[index] && errors[index].description &&
+                            <div><p className="error-msg">Завдання має бути від 3 до 50 символів</p></div>}
+
                         <div className="form-field">
                             <label htmlFor={`points-${index}`} className="label">Бали</label>
                             <input
@@ -107,7 +127,7 @@ function CardsForm({ onSubmit, gameId }) {
                                 onChange={(e) => handleChange(index, 'points', e.target.value)}
                                 className={"card-input"}
                             />
-                            {errors[index] && errors[index].points && <div>{errors[index].points}</div>}
+
                         </div>
                         <div className="select-wrapper form-field">
                             <label htmlFor={`category-${index}`} className="label">Категорія</label>
@@ -124,8 +144,10 @@ function CardsForm({ onSubmit, gameId }) {
                                     </option>
                                 ))}
                             </select>
-                            {errors[index] && errors[index].typeId && <div>{errors[index].typeId}</div>}
                         </div>
+
+                        {errors[index] && errors[index].typeId &&
+                            <div><p className="error-msg">Оберіть категорію</p></div>}
 
                         <button type="button" onClick={() => handleRemoveCard(index)} className={"remove-item"}>
                             <FontAwesomeIcon icon={faTrash} color={"black"}/>
@@ -142,7 +164,6 @@ function CardsForm({ onSubmit, gameId }) {
                             {cards.map((card, index) => (
                                 card.description.length > 0 ? (
                                     <li key={index} className="card-added" >
-
                                         <div>
                                             <div>{card.description}</div>
                                         </div>

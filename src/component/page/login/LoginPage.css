@@ -46,6 +46,7 @@ button.ghost {
     max-width: 100%;
     min-height: 480px;
     padding: 50px;
+    height: 600px;
 }
 
 .form-container {
@@ -72,7 +73,7 @@ button.ghost {
     width: 50%;
     opacity: 0;
     z-index: 1;
-    padding: 50px 0 10px 0;
+    padding: 5px 0 10px 0;
 }
 
 
@@ -160,4 +161,23 @@ button[type="submit"] {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.terms-label {
+    margin-left: 10px;
+    font-size: 10px;
+}
+
+.terms-checkbox {
+    width: 20%;
+}
+
+.no-margin {
+    margin: 0 0 3% 0;
 }

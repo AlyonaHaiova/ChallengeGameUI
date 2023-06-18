@@ -11,6 +11,7 @@ import * as saturn from "../../asset/image/Saturn.jpg";
 import Rocket from "./Rocket"
 import {PlayersProgress, TeamProgress} from "./PlayersProgress";
 import Winner from "./Winner";
+import {useMediaQuery} from "react-responsive";
 
 const Game = ({id}) => {
 
@@ -25,6 +26,8 @@ const Game = ({id}) => {
     const [showWinnerPopup, setShowWinnerPopup] = useState(false);
     const [isTeam, setIsTeam] = useState(false);
     const [previousPlayer,  setPreviousPlayer] = useState({});
+
+    const isMobile = useMediaQuery({ maxWidth: 768 });
 
     const planets = [
         {
@@ -360,14 +363,15 @@ const Game = ({id}) => {
                             ))
                         )}
                     </div>
-
-                    <div className="planet-container">
-                        {planets.map((planet, index) => (
-                            <div className="planet-item" key={index}>
-                                <img src={planet.src} alt={planet.title} />
-                            </div>
-                        ))}
-                    </div>
+                    {!isMobile &&
+                        <div className="planet-container">
+                            {planets.map((planet, index) => (
+                                <div className="planet-item" key={index}>
+                                    <img src={planet.src} alt={planet.title}/>
+                                </div>
+                            ))}
+                        </div>
+                    }
                 </div>
                 {Object.keys(card).length > 0 ?
                     <div>
@@ -386,8 +390,5 @@ const Game = ({id}) => {
             </div>
           </div>
         );
-
-
-
 }
 export default Game;

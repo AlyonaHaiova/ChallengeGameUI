@@ -65,3 +65,13 @@
 .centered.moves tr:last-child td {
     border-bottom: none;
 }
+
+@media (max-width: 768px) {
+    .popup {
+        justify-content: normal;
+    }
+
+    .popup-content {
+        max-width: 460px;
+    }
+}

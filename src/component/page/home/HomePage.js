@@ -3,6 +3,7 @@ import './HomePage.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Header from "../../Header/Header";
+import {useMediaQuery} from "react-responsive";
 
 const AdvantageCard = ({ title, description, color }) => {
 
@@ -35,6 +36,9 @@ const AdvantageCard = ({ title, description, color }) => {
 };
 
 const HomePage = () => {
+
+    const isMobile = useMediaQuery({ maxWidth: 1024 });
+
     const advantages = [
         {
             title: "Щира зацікавленість учня гарантована",
@@ -98,6 +102,7 @@ const HomePage = () => {
         <div className="home-page">
             <Header />
 
+            {!isMobile ? (
 <div className={"carousel-wrapper centered"}>
             <Carousel
                 renderArrowPrev={(onClickHandler, hasPrev) =>
@@ -132,8 +137,16 @@ const HomePage = () => {
                     <AdvantageCard key={index} title={advantage.title} description={advantage.description} />
                 ))}
             </Carousel>
-        </div>
+        </div>) : (
+            <div className={"centered"}>
+                {advantages.map((advantage, index) => (
+                    <AdvantageCard key={index} title={advantage.title} description={advantage.description} />
+                ))}
+            </div>
+            )
+            }
         <h1 className={"carousel-title"}>Хочеш побачити які ідеї можна втілити за допомогою Challenger?</h1>
+        {!isMobile ? (
         <div className={"carousel-wrapper centered"}>
           <Carousel
             renderArrowPrev={(onClickHandler, hasPrev) =>
@@ -168,7 +181,14 @@ const HomePage = () => {
                 <AdvantageCard key={index} title={card.title} description={card.description} color={card.color}/>
                 ))}
                 </Carousel>
-                </div>
+                </div>) : (
+            <div className={"centered"}>
+                {cards.map((card, index) => (
+                    <AdvantageCard key={index} title={card.title} description={card.description} color={card.color}/>
+                ))}
+            </div>
+        )
+        }
         </div>
     );
 };

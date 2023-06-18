@@ -10,7 +10,7 @@ export const NavbarActions = () => {
     const {user} = useContext(UserContext);
 
     return (
-        <div className="NavbarActions s-vflex-center">
+        <div className="NavbarActions">
             <div className="s-hflex">
                 <div className="text s-hflex s-vflex-center">
                     {user ? (
@@ -25,7 +25,7 @@ export const NavbarActions = () => {
                 </div>
                 <div className="s-vflex-center">
                     <Link to={pages.help} className={"navbar-link s-vflex-center"} id={"help-page-link"}>
-                        <span className="material-icons s-vflex-center">?</span>    
+                        <span className="material-icons s-vflex-center">?</span>
                     </Link>
                 </div>
             </div>

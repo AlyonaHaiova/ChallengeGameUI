@@ -502,3 +502,21 @@ a.deactivate {
     -webkit-transition: -webkit-transform 0.4s;
     -moz-transition: -moz-transform 0.4s;
 }
+
+.auth-form .error-msg {
+    font-size: 0.8rem;
+}
+
+.error-msg {
+    color: red;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.invalid-input {
+    border: red!important;
+}
+
+textarea {
+    width: 500px;
+}
